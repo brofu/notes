@@ -1,0 +1,8 @@
+{
+    "plugins": [
+        "pageview-count"
+        ],
+"   variables": {
+        "tools": "tools"
+    }
+}
