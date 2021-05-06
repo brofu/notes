@@ -5,7 +5,9 @@ This article will answer some key questions about virtual memory.
   * Memory layout for user mode process and kernel mode
 
 **Why Virtual Memory**
+  * Easy of use to programmers
   * Isolation from process (user mode) perspective
+  * Protection
 
 **Memory Layout (User mode process)**
 
@@ -27,7 +29,7 @@ This article will answer some key questions about virtual memory.
 
   * Heap
 
-    Allocated dynamically
+    Allocated dynamically (**malloc()** call in c or **new** in an object-oriented language such as C++ or Java)
 
   * Memory Mapping Segment
 
