@@ -8,6 +8,7 @@
 * [Tools](tools/summary.md)
   * [Shell](tools/shell/summary.md)
     * [Text Processing](tools/shell/text.md)
+    * [Network](tools/shell/network.md)
   * [Vim](tools/vim/summary.md)
   * [Git](tools/git/summary.md)
   * [Tmux](tools/tmux/summary.md)
