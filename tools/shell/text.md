@@ -22,6 +22,12 @@ This article records the text-processing skills based on shell tools. Use cases 
   * Key Points
     * Util **(?<=pattern)** and **(?=pattern)** of perl get grouped match. Refer to: https://perldoc.perl.org/perlre#Extended-Patterns
 
+  * Task Version 2 
+      * What if get `"419299832-4085646730`? Remove the `-` and `"` ?
+        ```
+        grep -a '(?<=OnlyInSource":\[").+(?="\],)' text_file -oP | awk -F',' '{for(i=1;i<=NF;i++) {print $i}}' | awk -F'-' '{print $1, $2}' | sed 's/"//' >> result_file
+        ```
+
   ## Case 2
   * Task.
   Have multiple log files which contains the following

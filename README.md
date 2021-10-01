@@ -7,8 +7,9 @@ This book records the daily notes & thinkings, which covers but not limited to t
     * Algorithm
     * Information Security
   * Software Engineering
-    * Design Pattern
-    * Software Engineering Philosophy
+    * Programming Paradigms
+    * Software Design Pattern
+    * Software Design Principles
   * Programming Languages
     * Golang
     * Python
