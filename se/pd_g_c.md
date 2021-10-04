@@ -106,6 +106,6 @@ Actually, there are still problems with this version. For example,
 ## Conclusions
 * C is bad at `generics`
 * To support `generics`, we need to abstract 2 aspects:
-  * `data types` and `operations` based on them
-  * `data containers` (also known as `data containers`) and `operations` based on them
+  * `data type` and `operations` based on them
+  * `data struct` (also known as `data container`) and `operations` based on them
 
