@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>Paradigms · GitBook</title>
+        <title>Generics: C++ · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="pd_g_c.html" />
+    <link rel="next" href="pd_g_t.html" />
     
     
-    <link rel="prev" href="summary.html" />
+    <link rel="prev" href="pd_g_c.html" />
     
 
     </head>
@@ -216,7 +216,7 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.3.1" data-path="pd.html">
+        <li class="chapter " data-level="1.3.1" data-path="pd.html">
             
                 <a href="pd.html">
             
@@ -243,7 +243,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.3.1.2" data-path="pd_g_cp.html">
+        <li class="chapter active" data-level="1.3.1.2" data-path="pd_g_cp.html">
             
                 <a href="pd_g_cp.html">
             
@@ -438,7 +438,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href=".." >Paradigms</a>
+        <a href=".." >Generics: C++</a>
     </h1>
 </div>
 
@@ -453,14 +453,45 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <h1 id="programming-paradigms">Programming Paradigms</h1>
-<p>Topics would be included:</p>
+                                <h1 id="generics-in-c">Generics In C++</h1>
+<h2 id="key-characters-of-c-comparing-with-c">Key Characters of C++ (comparing with C)</h2>
+<blockquote>
 <ul>
-<li>[Generic]<ul>
-<li><a href="pd_g_c.html">Generics: How does C do this</a></li>
+<li>&#x7528;&#x5F15;&#x7528;&#x6765;&#x89E3;&#x51B3;&#x6307;&#x9488;&#x7684;&#x95EE;&#x9898;&#x3002;</li>
+<li>&#x7528; namespace &#x6765;&#x89E3;&#x51B3;&#x540D;&#x5B57;&#x7A7A;&#x95F4;&#x51B2;&#x7A81;&#x7684;&#x95EE;&#x9898;&#x3002;</li>
+<li>&#x901A;&#x8FC7; try-catch &#x6765;&#x89E3;&#x51B3;&#x68C0;&#x67E5;&#x8FD4;&#x56DE;&#x503C;&#x7F16;&#x7A0B;&#x7684;&#x95EE;&#x9898;&#x3002;</li>
+<li>&#x7528; class &#x6765;&#x89E3;&#x51B3;&#x5BF9;&#x8C61;&#x7684;&#x521B;&#x5EFA;&#x3001;&#x590D;&#x5236;&#x3001;&#x9500;&#x6BC1;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x4ECE;&#x800C;&#x53EF;&#x4EE5;&#x8FBE;&#x5230;&#x5728;&#x7ED3;&#x6784;&#x4F53;&#x5D4C;&#x5957;&#x65F6;&#x53EF;&#x4EE5;&#x6DF1;&#x5EA6;&#x590D;&#x5236;&#x7684;&#x5185;&#x5B58;&#x5B89;&#x5168;&#x95EE;&#x9898;&#x3002;</li>
+<li>&#x901A;&#x8FC7;&#x91CD;&#x8F7D;&#x64CD;&#x4F5C;&#x7B26;&#x6765;&#x8FBE;&#x5230;&#x64CD;&#x4F5C;&#x4E0A;&#x7684;&#x6CDB;&#x578B;&#x3002;&#xFF08;&#x6BD4;&#x5982;&#xFF0C;&#x6D88;&#x9664;&#x300A;01 | &#x7F16;&#x7A0B;&#x8303;&#x5F0F;&#x6E38;&#x8BB0;&#xFF1A;&#x8D77;&#x6E90;&#x300B;&#x4E2D;&#x63D0;&#x5230;&#x7684;&#x6BD4;&#x8F83;&#x51FD;&#x6570;cmpFn&#xFF0C;&#x518D;&#x6BD4;&#x5982;&#x7528;&gt;&gt;&#x64CD;&#x4F5C;&#x7B26;&#x6D88;&#x9664;printf()&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;&#x4E0D;&#x591F;&#x6CDB;&#x578B;&#x7684;&#x95EE;&#x9898;&#x3002;&#xFF09;</li>
+<li>&#x901A;&#x8FC7;&#x6A21;&#x677F; template &#x548C;&#x865A;&#x51FD;&#x6570;&#x7684;&#x591A;&#x6001;&#x4EE5;&#x53CA;&#x8FD0;&#x884C;&#x65F6;&#x8BC6;&#x522B;&#x6765;&#x8FBE;&#x5230;&#x66F4;&#x9AD8;&#x5C42;&#x6B21;&#x7684;&#x6CDB;&#x578B;&#x548C;&#x591A;&#x6001;&#x3002;</li>
+<li>&#x7528; RAII&#x3001;&#x667A;&#x80FD;&#x6307;&#x9488;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x89E3;&#x51B3;&#x4E86; C &#x8BED;&#x8A00;&#x4E2D;&#x56E0;&#x4E3A;&#x9700;&#x8981;&#x91CA;&#x653E;&#x8D44;&#x6E90;&#x800C;&#x51FA;&#x73B0;&#x7684;&#x90A3;&#x4E9B;&#x975E;&#x5E38; ugly &#x4E5F;&#x5F88;&#x5BB9;&#x6613;&#x51FA;&#x9519;&#x7684;&#x4EE3;&#x7801;&#x7684;&#x95EE;&#x9898;&#x3002;</li>
+<li>&#x7528; STL &#x89E3;&#x51B3;&#x4E86; C &#x8BED;&#x8A00;&#x4E2D;&#x7B97;&#x6CD5;&#x548C;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684; N &#x591A;&#x79CD;&#x5751;&#x3002;</li>
+</ul>
+</blockquote>
+<h2 id="generics-in-c">Generics In C++</h2>
+<p>C++ support generics with 3 main approaches:</p>
+<ul>
+<li>Class</li>
+<li>Template</li>
+<li>&#x865A;&#x51FD;&#x6570;&#x548C;&#x8FD0;&#x884C;&#x65F6;&#x7C7B;&#x578B;&#x8BC6;&#x522B;</li>
+</ul>
+<h2 id="conclusions">Conclusions</h2>
+<ul>
+<li>Ideally, the <code>algorithm</code> should be <code>decoupled</code> with <code>data type</code> and <code>data struct</code> (<code>data container</code>). </li>
+<li>So, <code>generics programming</code> should resolve the following aspects:<ul>
+<li><code>allgorithm</code> supports generics</li>
+<li><code>data type</code> supports generics ==&gt; Template</li>
+<li><code>data struct</code>  supports generics ==&gt; Iterator</li>
 </ul>
 </li>
 </ul>
+<h2 id="questions">Questions</h2>
+<ul>
+<li>How to abstract <code>sum</code> function to a <code>reduce</code> function? A: Decouple <code>loop</code> and <code>operation</code></li>
+</ul>
+<h2 id="reference">Reference</h2>
+<ol>
+<li><a href="https://time.geekbang.org/column/article/303" target="_blank">https://time.geekbang.org/column/article/303</a></li>
+</ol>
 
                                 
                                 </section>
@@ -488,12 +519,12 @@
 
             
                 
-                <a href="summary.html" class="navigation navigation-prev " aria-label="Previous page: Software Engineering">
+                <a href="pd_g_c.html" class="navigation navigation-prev " aria-label="Previous page: Generics: How does C do this">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="pd_g_c.html" class="navigation navigation-next " aria-label="Next page: Generics: How does C do this">
+                <a href="pd_g_t.html" class="navigation navigation-next " aria-label="Next page: Generics: Type System and Nature of Generics">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -504,7 +535,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"Paradigms","level":"1.3.1","depth":2,"next":{"title":"Generics: How does C do this","level":"1.3.1.1","depth":3,"path":"se/pd_g_c.md","ref":"se/pd_g_c.md","articles":[]},"previous":{"title":"Software Engineering","level":"1.3","depth":1,"path":"se/summary.md","ref":"se/summary.md","articles":[{"title":"Paradigms","level":"1.3.1","depth":2,"path":"se/pd.md","ref":"se/pd.md","articles":[{"title":"Generics: How does C do this","level":"1.3.1.1","depth":3,"path":"se/pd_g_c.md","ref":"se/pd_g_c.md","articles":[]},{"title":"Generics: C++","level":"1.3.1.2","depth":3,"path":"se/pd_g_cp.md","ref":"se/pd_g_cp.md","articles":[]},{"title":"Generics: Type System and Nature of Generics","level":"1.3.1.3","depth":3,"path":"se/pd_g_t.md","ref":"se/pd_g_t.md","articles":[]}]},{"title":"Patterns","level":"1.3.2","depth":2,"path":"se/pt_summary.md","ref":"se/pt_summary.md","articles":[]},{"title":"Principles","level":"1.3.3","depth":2,"path":"se/pc.md","ref":"se/pc.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["pageview-count"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"pageview-count":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"   variables":{"tools":"tools"},"variables":{},"gitbook":"*"},"file":{"path":"se/pd.md","mtime":"2021-10-04T15:54:23.013Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-06T18:25:51.520Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"Generics: C++","level":"1.3.1.2","depth":3,"next":{"title":"Generics: Type System and Nature of Generics","level":"1.3.1.3","depth":3,"path":"se/pd_g_t.md","ref":"se/pd_g_t.md","articles":[]},"previous":{"title":"Generics: How does C do this","level":"1.3.1.1","depth":3,"path":"se/pd_g_c.md","ref":"se/pd_g_c.md","articles":[]},"dir":"ltr"},"config":{"plugins":["pageview-count"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"pageview-count":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"   variables":{"tools":"tools"},"variables":{},"gitbook":"*"},"file":{"path":"se/pd_g_cp.md","mtime":"2021-10-06T17:37:11.308Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-10-06T18:25:51.520Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
