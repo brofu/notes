@@ -10,6 +10,7 @@
         * [Generics: How does C do this](se/pd_g_c.md)
         * [Generics: C++](se/pd_g_cp.md)
         * [Generics: Type System and Nature of Generics](se/pd_g_t.md)
+        * [Functional Programming](se/pd_f.md)
     * [Patterns](se/pt_summary.md)
     * [Principles](se/pc.md)
 * [Tools](tools/summary.md)
