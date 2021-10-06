@@ -104,6 +104,7 @@ Actually, there are still problems with this version. For example,
 
 
 ## Conclusions
+* C 面向过程 `programmming generic`
 * C is bad at `generics`
 * To support `generics`, we need to abstract 2 aspects:
   * `data type` and `operations` based on them
