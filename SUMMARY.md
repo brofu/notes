@@ -11,6 +11,7 @@
         * [Generics: C++](se/pd_g_cp.md)
         * [Generics: Type System and Nature of Generics](se/pd_g_t.md)
         * [Functional Programming](se/pd_f.md)
+        * [Decorator Pattern](se/pd_d.md)
     * [Patterns](se/pt_summary.md)
     * [Principles](se/pc.md)
 * [Tools](tools/summary.md)

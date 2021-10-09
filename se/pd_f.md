@@ -42,6 +42,8 @@
 
 1. [tr][tr]
 2. [fp][fp]
+3. [tr2][tr2]
 
 [fp]:https://time.geekbang.org/column/article/2712
 [tr]: https://en.wikipedia.org/wiki/Recursion_(computer_science)#Tail-recursive_functions]
+[tr2]: https://zhuanlan.zhihu.com/p/350103441
