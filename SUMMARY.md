@@ -18,12 +18,17 @@
     * [Patterns](se/pt_summary.md)
     * [Principles](se/pc.md)
 * [Tools](tools/summary.md)
-  * [Shell](tools/shell/summary.md)
-    * [Text Processing](tools/shell/text.md)
-    * [Network](tools/shell/network.md)
-  * [Vim](tools/vim/summary.md)
-  * [Git](tools/git/summary.md)
-  * [Tmux](tools/tmux/summary.md)
+    * [Shell](tools/shell/summary.md)
+        * [Text Processing](tools/shell/text.md)
+        * [Network](tools/shell/network.md)
+    * [Vim](tools/vim/summary.md)
+    * [Git](tools/git/summary.md)
+        * [Principle](tools/git/principle/summary.md)
+        * [cmds](tools/git/cmds/summary.md)
+            * [reset](tools/git/cmds/reset.md)
+        * [tips](tools/git/tips/summary.md)
+            * [commit](tools/git/tips/commits.md)
+    * [Tmux](tools/tmux/summary.md)
 
 
 
