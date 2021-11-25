@@ -26,6 +26,7 @@
         * [Principle](tools/git/principle/summary.md)
         * [cmds](tools/git/cmds/summary.md)
             * [reset](tools/git/cmds/reset.md)
+            * [commit](tools/git/cmds/commit.md)
         * [tips](tools/git/tips/summary.md)
             * [commit](tools/git/tips/commits.md)
     * [Tmux](tools/tmux/summary.md)
