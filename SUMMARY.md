@@ -29,6 +29,7 @@
             * [reset](tools/git/cmds/reset.md)
             * [commit](tools/git/cmds/commit.md)
             * [rebase](tools/git/cmds/rebase.md)
+            * [merge](tools/git/cmds/merge.md)
         * [tips](tools/git/tips/summary.md)
             * [commit](tools/git/tips/commits.md)
     * [Tmux](tools/tmux/summary.md)
