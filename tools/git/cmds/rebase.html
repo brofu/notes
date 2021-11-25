@@ -4,7 +4,7 @@
     <head>
         <meta charset="UTF-8">
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-        <title>commit · GitBook</title>
+        <title>rebase · GitBook</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="description" content="">
         <meta name="generator" content="GitBook 3.2.3">
@@ -61,10 +61,10 @@
     <link rel="shortcut icon" href="../../../gitbook/images/favicon.ico" type="image/x-icon">
 
     
-    <link rel="next" href="../../tmux/summary.html" />
+    <link rel="next" href="merge.html" />
     
     
-    <link rel="prev" href="summary.md" />
+    <link rel="prev" href="commit.html" />
     
 
     </head>
@@ -488,7 +488,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3.2" data-path="../cmds/summary.md">
+        <li class="chapter " data-level="1.4.3.2" data-path="summary.md">
             
                 <span>
             
@@ -502,9 +502,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter " data-level="1.4.3.2.1" data-path="../cmds/reset.html">
+        <li class="chapter " data-level="1.4.3.2.1" data-path="reset.html">
             
-                <a href="../cmds/reset.html">
+                <a href="reset.html">
             
                     
                     reset
@@ -515,9 +515,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3.2.2" data-path="../cmds/commit.html">
+        <li class="chapter " data-level="1.4.3.2.2" data-path="commit.html">
             
-                <a href="../cmds/commit.html">
+                <a href="commit.html">
             
                     
                     commit
@@ -528,9 +528,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3.2.3" data-path="../cmds/rebase.html">
+        <li class="chapter active" data-level="1.4.3.2.3" data-path="rebase.html">
             
-                <a href="../cmds/rebase.html">
+                <a href="rebase.html">
             
                     
                     rebase
@@ -541,9 +541,9 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3.2.4" data-path="../cmds/merge.html">
+        <li class="chapter " data-level="1.4.3.2.4" data-path="merge.html">
             
-                <a href="../cmds/merge.html">
+                <a href="merge.html">
             
                     
                     merge
@@ -559,7 +559,7 @@
             
         </li>
     
-        <li class="chapter " data-level="1.4.3.3" data-path="summary.md">
+        <li class="chapter " data-level="1.4.3.3" data-path="../tips/summary.md">
             
                 <span>
             
@@ -573,9 +573,9 @@
             <ul class="articles">
                 
     
-        <li class="chapter active" data-level="1.4.3.3.1" data-path="commits.html">
+        <li class="chapter " data-level="1.4.3.3.1" data-path="../tips/commits.html">
             
-                <a href="commits.html">
+                <a href="../tips/commits.html">
             
                     
                     commit
@@ -644,7 +644,7 @@
     <!-- Title -->
     <h1>
         <i class="fa fa-circle-o-notch fa-spin"></i>
-        <a href="../../.." >commit</a>
+        <a href="../../.." >rebase</a>
     </h1>
 </div>
 
@@ -659,25 +659,57 @@
     
                                 <section class="normal markdown-section">
                                 
-                                <p>Q: How to update the <code>authors</code> for commits. For example, the <code>user.name</code> and <code>user.email</code> is WRONG configured previously?
-A: </p>
+                                <ol>
+<li><p>Understand the section of <code>RECOVERING FROM UPSTREAM REBASE</code> in the manual</p>
 <ul>
-<li>If only the latest commit need to update, may try <code>soft reset</code> or <code>commit --amend</code><ul>
-<li>soft reset<ul>
-<li>example<pre><code> git config --local user.name brofu
- git reset --soft HEAD^  
- git commit -c ORIG_HEAD
+<li><p>Situation</p>
+<blockquote>
+<p>To illustrate, suppose you are in a situation where someone develops a subsystem branch, and you are working on a topic that is dependent on this subsystem. You might end up with a history like the following:</p>
+<pre><code>    o---o---o---o---o---o---o---o  master
+         \
+          o---o---o---o---o  subsystem
+                           \
+                            *---*---*  topic
+</code></pre><p>If subsystem is rebased against master, the following happens:</p>
+<pre><code>    o---o---o---o---o---o---o---o  master
+         \                       \
+          o---o---o---o---o       o&apos;--o&apos;--o&apos;--o&apos;--o&apos;  subsystem
+                           \
+                            *---*---*  topic
+</code></pre></blockquote>
+</li>
+<li><p>Why need to <code>revover from upsteam rebase</code>? </p>
+<blockquote>
+<p> If you now continue development as usual, and eventually merge topic to subsystem, the commits from subsystem will remain duplicated forever:</p>
+<pre><code>    o---o---o---o---o---o---o---o  master
+         \                       \
+          o---o---o---o---o       o&apos;--o&apos;--o&apos;--o&apos;--o&apos;--M  subsystem
+                           \                         /
+                            *---*---*-..........-*--*  topic
+</code></pre><p>Such duplicates are generally frowned upon because <strong>they clutter up history, making it harder to follow.</strong></p>
+</blockquote>
+</li>
+<li><p>How to resolve? Need to rebase topic also. And this would lead to a ripple affect.</p>
+<blockquote>
+<p>To clean things up, you need to transplant the commits on topic to the new subsystem tip, i.e., rebase topic. This becomes a ripple effect: anyone downstream from topic is forced to rebase too, and so on!</p>
+</blockquote>
+</li>
+<li><p>Easy case.</p>
+<pre><code>git fetch 
+git checkout topic
+git rebase origin/subsystem
+git push -f
+</code></pre></li>
+<li><p>Hard case</p>
+<p><strong>There is update during rebase subsystem</strong></p>
+<pre><code>git fetch
+git checkout topic
+git rebase --onto origin/subsystem &lt;commit&gt; // &lt;commit&gt; is the tip of old subsystem (before rebase), and on this commit, topic is checked out.
+git push -f
 </code></pre></li>
 </ul>
 </li>
-<li>commit --amend<ul>
-<li>example<pre><code>  git commit --amend --author=&quot;brofu &lt;brofu@xx.com&gt;&quot; --no-edit
-</code></pre></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+</ol>
 
                                 
                                 </section>
@@ -705,12 +737,12 @@ A: </p>
 
             
                 
-                <a href="summary.md" class="navigation navigation-prev " aria-label="Previous page: tips">
+                <a href="commit.html" class="navigation navigation-prev " aria-label="Previous page: commit">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
                 
-                <a href="../../tmux/summary.html" class="navigation navigation-next " aria-label="Next page: Tmux">
+                <a href="merge.html" class="navigation navigation-next " aria-label="Next page: merge">
                     <i class="fa fa-angle-right"></i>
                 </a>
                 
@@ -721,7 +753,7 @@ A: </p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"title":"commit","level":"1.4.3.3.1","depth":4,"next":{"title":"Tmux","level":"1.4.4","depth":2,"path":"tools/tmux/summary.md","ref":"tools/tmux/summary.md","articles":[]},"previous":{"title":"tips","level":"1.4.3.3","depth":3,"path":"tools/git/tips/summary.md","ref":"tools/git/tips/summary.md","articles":[{"title":"commit","level":"1.4.3.3.1","depth":4,"path":"tools/git/tips/commits.md","ref":"tools/git/tips/commits.md","articles":[]}]},"dir":"ltr"},"config":{"plugins":["pageview-count"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"pageview-count":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"   variables":{"tools":"tools"},"variables":{},"gitbook":"*"},"file":{"path":"tools/git/tips/commits.md","mtime":"2021-11-25T17:12:04.351Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-11-25T17:54:37.406Z"},"basePath":"../../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"title":"rebase","level":"1.4.3.2.3","depth":4,"next":{"title":"merge","level":"1.4.3.2.4","depth":4,"path":"tools/git/cmds/merge.md","ref":"tools/git/cmds/merge.md","articles":[]},"previous":{"title":"commit","level":"1.4.3.2.2","depth":4,"path":"tools/git/cmds/commit.md","ref":"tools/git/cmds/commit.md","articles":[]},"dir":"ltr"},"config":{"plugins":["pageview-count"],"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"pluginsConfig":{"pageview-count":{},"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"   variables":{"tools":"tools"},"variables":{},"gitbook":"*"},"file":{"path":"tools/git/cmds/rebase.md","mtime":"2021-11-25T17:30:26.850Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2021-11-25T17:54:37.406Z"},"basePath":"../../..","book":{"language":""}});
         });
     </script>
 </div>
