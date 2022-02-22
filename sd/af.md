@@ -1,12 +1,12 @@
 # Application Framework
 
-In this article, we would talk about, what should be covered by an application framework? An `application` means an internet application, usually named a `service`.
+In this article, we would talk about, what `features` should be covered by an application framework? An `application` means an internet application, usually named a `service`.
 
 ## Functions Should Be Covered By Framework
 
 1. Code Organisation 
   * Internal Libs Integration
-2. Configuration
+* Configuration
 * Log
 * Interceptor
 * Progress Management (Signal usually) 
@@ -22,6 +22,6 @@ In this article, we would talk about, what should be covered by an application f
 
 
 ### Code Organization
-  1. General code quickly with some cmds.
+  1. General code quickly with some CMDs.
 
 ### CI
